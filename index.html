@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elastisitas Pertumbuhan Ekonomi & Tenaga Kerja Indonesia · #SemuaBisaDihitung</title>
+<meta name="description" content="Analisis ekonometrika Cobb-Douglas hubungan dua arah antara laju pertumbuhan ekonomi dan serapan tenaga kerja Indonesia, 1986–2025." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}], throwOnError: false});"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root {
+  --cream: #F7F2E8;
+  --paper: #FDFAF3;
+  --paper-2: #FFFFFF;
+  --ink: #1A1814;
+  --ink-2: #2B2620;
+  --muted: #6B6358;
+  --muted-2: #8A8175;
+  --rule: #E0D8C6;
+  --rule-2: #EEE7D6;
+  --emerald: #2E6B47;
+  --emerald-soft: #4E8E68;
+  --terracotta: #B84A3B;
+  --navy: #2C4970;
+  --navy-soft: #4A6B95;
+  --gold: #B8923C;
+  --gold-soft: #D4AD52;
+  --shadow: 0 1px 2px rgba(26,24,20,0.04), 0 4px 14px rgba(26,24,20,0.06);
+  --shadow-lg: 0 2px 4px rgba(26,24,20,0.05), 0 10px 30px rgba(26,24,20,0.08);
+}
+
+/* ============ RESET & BASE ============ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle grain texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ TYPOGRAPHY ============ */
+.serif { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 600; }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); font-weight: 600; }
+h4 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0; }
+
+p { color: var(--ink-2); }
+.lead { font-size: 1.1rem; color: var(--muted); line-height: 1.65; }
+
+a { color: var(--emerald); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--terracotta); }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============ HEADER ============ */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--ink);
+}
+.brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--ink); color: var(--cream);
+  border-radius: 4px;
+  font-family: 'Fraunces', serif;
+  font-style: italic; font-weight: 700;
+  font-size: 0.95rem;
+}
+.topbar nav { display: flex; gap: 24px; }
+.topbar nav a {
+  color: var(--muted); text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.topbar nav a:hover { color: var(--ink); }
+
+/* ============ HERO ============ */
+.hero {
+  padding: 80px 0 48px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 12px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  margin-bottom: 28px;
+  max-width: 22ch;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--emerald);
+  font-weight: 500;
+}
+.hero .lead {
+  max-width: 60ch;
+  margin-bottom: 48px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.stat {
+  padding: 24px 28px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.stat-value {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-value sup {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--emerald);
+  vertical-align: super;
+  margin-left: 4px;
+}
+.stat-caption {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ============ SECTIONS ============ */
+section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.section-head {
+  margin-bottom: 40px;
+}
+.section-head .eyebrow {
+  margin-bottom: 12px;
+}
+.section-head h2 {
+  margin-bottom: 16px;
+}
+.section-head .lead {
+  max-width: 70ch;
+}
+
+/* ============ CARDS ============ */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.card-tight { padding: 22px; }
+.card-em {
+  background: var(--paper-2);
+  border-left: 3px solid var(--emerald);
+}
+.card-note {
+  background: #FBF6E8;
+  border-left: 3px solid var(--gold);
+}
+.card-warn {
+  background: #FBEFEA;
+  border-left: 3px solid var(--terracotta);
+}
+.card-title {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.card-title h4 { margin: 0; }
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 3px 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background: var(--rule-2);
+  color: var(--ink-2);
+}
+.tag-em { background: var(--emerald); color: white; }
+.tag-navy { background: var(--navy); color: white; }
+.tag-gold { background: var(--gold); color: white; }
+.tag-terra { background: var(--terracotta); color: white; }
+
+/* ============ GRID LAYOUTS ============ */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+@media (max-width: 880px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ============ METODOLOGI ============ */
+.method-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-top: 1px solid var(--rule);
+}
+.method-step:last-child { border-bottom: 1px solid var(--rule); }
+.method-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--emerald);
+  font-style: italic;
+}
+.method-body p { margin-bottom: 12px; line-height: 1.7; }
+.method-body p:last-child { margin-bottom: 0; }
+.method-body ul { padding-left: 20px; margin: 12px 0; }
+.method-body ul li { margin-bottom: 8px; color: var(--ink-2); }
+.method-body strong { color: var(--ink); font-weight: 600; }
+.formula-box {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 18px 0;
+  overflow-x: auto;
+  text-align: center;
+  font-size: 1.05rem;
+}
+.formula-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .method-step { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .method-num { font-size: 2.5rem; }
+}
+
+/* ============ TABLE ============ */
+.table-wrap {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+.table-scroll {
+  overflow-x: auto;
+  max-height: 520px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+table thead {
+  background: var(--ink);
+  color: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+table th {
+  padding: 12px 14px;
+  text-align: right;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+table th:first-child, table td:first-child { text-align: left; position: sticky; left: 0; }
+table th:first-child { background: var(--ink); }
+table td:first-child { background: var(--paper); font-weight: 600; color: var(--ink); }
+table tbody tr:hover td { background: var(--rule-2); }
+table tbody tr:hover td:first-child { background: var(--rule-2); }
+table td {
+  padding: 10px 14px;
+  text-align: right;
+  border-bottom: 1px solid var(--rule-2);
+  border-right: 1px solid var(--rule-2);
+  color: var(--ink-2);
+}
+.td-pos { color: var(--emerald); font-weight: 600; }
+.td-neg { color: var(--terracotta); font-weight: 600; }
+.td-na { color: var(--muted-2); font-style: italic; }
+
+/* ============ CHARTS ============ */
+.chart-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px 28px 16px 28px;
+  box-shadow: var(--shadow);
+}
+.chart-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px; flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-2);
+}
+.chart-header h4 { margin: 0; }
+.chart-header .chart-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.chart-container {
+  position: relative;
+  height: 360px;
+}
+.chart-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ============ CALCULATOR ============ */
+.calc-block {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 36px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 32px;
+}
+.calc-block.calc-em { border-top: 4px solid var(--emerald); }
+.calc-block.calc-navy { border-top: 4px solid var(--navy); }
+.calc-block.calc-gold { border-top: 4px solid var(--gold); }
+
+.calc-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.calc-label .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--emerald);
+  line-height: 1;
+}
+.calc-block h3 {
+  margin-bottom: 6px;
+}
+.calc-block .calc-sub {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+.calc-q {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink);
+  padding: 14px 18px;
+  background: var(--rule-2);
+  border-radius: 6px;
+  margin-bottom: 22px;
+  position: relative;
+  padding-left: 36px;
+}
+.calc-q::before {
+  content: "?";
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--emerald);
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.input-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 700px) {
+  .input-row, .input-row.cols-3 { grid-template-columns: 1fr; }
+}
+
+.input-field label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.input-field input[type="text"],
+.input-field input[type="number"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper-2);
+  color: var(--ink);
+  transition: border 0.15s, box-shadow 0.15s;
+}
+.input-field input:focus {
+  outline: none;
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px rgba(46,107,71,0.12);
+}
+.input-help {
+  font-size: 0.75rem;
+  color: var(--muted-2);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.result-card {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-top: 24px;
+  position: relative;
+}
+.result-card .result-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold-soft);
+  margin-bottom: 14px;
+  display: block;
+}
+.result-card .result-value {
+  font-family: 'Fraunces', serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 12px;
+}
+.result-card .result-value .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--gold-soft);
+  font-weight: 400;
+  margin-left: 6px;
+}
+.result-card .result-detail {
+  font-size: 0.92rem;
+  color: rgba(247,242,232,0.75);
+  line-height: 1.6;
+  max-width: 65ch;
+}
+.result-card .result-detail strong {
+  color: white;
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex; gap: 4px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 28px;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 12px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border 0.15s;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active {
+  color: var(--ink);
+  border-bottom-color: var(--emerald);
+}
+
+.engines-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (max-width: 880px) {
+  .engines-grid { grid-template-columns: 1fr; }
+}
+.engine-card {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+.engine-card.eng-l { border-top: 3px solid var(--navy); }
+.engine-card.eng-k { border-top: 3px solid var(--gold); }
+.engine-card.eng-a { border-top: 3px solid var(--terracotta); }
+.engine-card h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.engine-card .engine-sym {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.engine-card input {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--paper);
+}
+.engine-contribution {
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+.engine-contribution .val {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ============ DETAILS / EXPANDER ============ */
+details {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper-2);
+  margin: 16px 0;
+}
+details summary {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  list-style: none;
+  display: flex; align-items: center; gap: 8px;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "+";
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  color: var(--emerald);
+  font-size: 1.1rem;
+}
+details[open] summary::before { content: "−"; }
+details .details-body {
+  padding: 0 18px 18px 18px;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+details .details-body p { margin-bottom: 10px; }
+details .details-body ul { padding-left: 22px; margin: 8px 0; }
+details .details-body li { margin-bottom: 6px; }
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 80px 0 60px 0;
+  text-align: center;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(46,107,71,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(184,146,60,0.08) 0%, transparent 50%),
+    var(--cream);
+  position: relative;
+  border-bottom: none;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rule), transparent);
+}
+.footer-mark {
+  display: inline-block;
+  padding: 18px 36px;
+  background: var(--paper-2);
+  border-radius: 32px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--rule);
+}
+.footer-mark .footer-title {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.footer-mark .footer-by {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.footer-sources {
+  margin-top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted-2);
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="brand">
+    <span class="brand-mark">f</span>
+    <span>#SemuaBisaDihitung</span>
+  </div>
+  <nav>
+    <a href="#metodologi">Metode</a>
+    <a href="#data">Data</a>
+    <a href="#visualisasi">Grafik</a>
+    <a href="#kalkulator">Kalkulator</a>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-meta">
+    <span class="eyebrow">Dashboard · Ekonomi Pembangunan · 1986–2025</span>
+    <span class="eyebrow">Edisi v1.0</span>
+  </div>
+  <h1>Berapa <em>banyak</em> lapangan kerja yang muncul dari satu persen pertumbuhan ekonomi?</h1>
+  <p class="lead">Analisis ekonometrika empat dekade data Indonesia untuk mengukur hubungan dua arah antara laju Pertumbuhan Ekonomi (Y), Serapan Tenaga Kerja (L), dan Pembentukan Modal Tetap Bruto (K) — dengan pendekatan fungsi produksi Cobb-Douglas multivariat.</p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-label">Elastisitas Output Tenaga Kerja</div>
+      <div class="stat-value mono">β = 1.7311</div>
+      <div class="stat-caption">Tambahan 1% pekerja → 1.73% pertumbuhan Y (ceteris paribus K).</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Elastisitas Permintaan Pekerja</div>
+      <div class="stat-value mono">β<sub>inv</sub> = 0.3966</div>
+      <div class="stat-caption">Target 1% pertumbuhan Y → 0.40% lapangan kerja baru.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Goodness of Fit (OLS)</div>
+      <div class="stat-value mono">R² = 0.987</div>
+      <div class="stat-caption">98.7% variasi ln L dijelaskan oleh ln Y dan ln K (n=40).</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Total Faktor Produktivitas</div>
+      <div class="stat-value mono">Ā ≈ 0.9%<span style="font-size:0.6em;">/thn</span></div>
+      <div class="stat-caption">Rata-rata pertumbuhan TFP Indonesia 1987–2023 (Solow residual).</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ METODOLOGI ============ -->
+<section id="metodologi">
+  <div class="section-head">
+    <div class="eyebrow">§ 01 · Kerangka Teori & Estimasi</div>
+    <h2>Dari fungsi produksi Cobb-Douglas ke elastisitas yang dapat diuji</h2>
+    <p class="lead">Pertanyaan "berapa lapangan kerja per 1% pertumbuhan?" tidak bisa dijawab dengan rasio sederhana, karena Y dan L bergerak bersama Modal (K), Teknologi (A), dan banyak guncangan eksogen. Dashboard ini mengurai efek murninya dengan empat langkah berikut.</p>
+  </div>
+
+  <!-- LANGKAH 1: FUNGSI PRODUKSI -->
+  <div class="method-step">
+    <div class="method-num">01</div>
+    <div class="method-body">
+      <h4>Fungsi produksi multivariat Cobb-Douglas</h4>
+      <p>Output agregat (Y) diasumsikan sebagai hasil interaksi tiga input utama: tingkat teknologi/efisiensi (A), stok modal fisik (K), dan jumlah pekerja (L). Bentuk fungsional:</p>
+      <div class="formula-box">
+        <div class="formula-label">Fungsi Produksi Tingkat Level</div>
+        $$ Y_t \;=\; A_t \cdot K_t^{\alpha} \cdot L_t^{\beta} $$
+      </div>
+      <p>Bentuk ini punya tiga sifat penting: <strong>(i)</strong> setiap input bersifat <em>komplementer</em> (mesin tanpa operator = 0); <strong>(ii)</strong> eksponen α dan β langsung dapat dibaca sebagai <strong>elastisitas</strong> output terhadap masing-masing input; <strong>(iii)</strong> jika α + β = 1 berlaku <em>constant returns to scale</em>, jika lebih besar berarti <em>increasing returns</em>.</p>
+      <details>
+        <summary>Kenapa Cobb-Douglas, bukan CES atau translog?</summary>
+        <div class="details-body">
+          <p>Cobb-Douglas (1928) dipilih karena <strong>(a)</strong> dapat di-log-linearkan sehingga estimasi OLS langsung memberi elastisitas; <strong>(b)</strong> data Indonesia 40-tahunan terbatas untuk identifikasi parameter substitusi CES yang lebih kompleks; <strong>(c)</strong> mayoritas literatur growth accounting Indonesia (BPS, APO, Bank Dunia) memakai spesifikasi ini sehingga hasil dapat dibandingkan.</p>
+          <p>Trade-off: Cobb-Douglas memaksa <em>elastisitas substitusi = 1</em>. Konsekuensinya, perubahan harga relatif kapital-tenaga kerja diasumsikan tidak mengubah rasio K/L secara dramatis. Untuk analisis pasar tenaga kerja jangka pendek, asumsi ini bisa terlalu kaku.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- LANGKAH 2: LOG-LINEARISASI -->
+  <div class="method-step">
+    <div class="method-num">02</div>
+    <div class="method-body">
+      <h4>Log-linearisasi & estimasi OLS</h4>
+      <p>Karena ruas kanan Cobb-Douglas berbentuk perkalian eksponensial, kita ambil logaritma natural kedua sisi. Hasilnya persamaan linier yang dapat diestimasi dengan <em>Ordinary Least Squares</em>:</p>
+      <div class="formula-box">
+        <div class="formula-label">Spesifikasi Empiris</div>
+        $$ \ln Y_t \;=\; \underbrace{\ln A_t}_{c_0 + \varepsilon_t} \;+\; \alpha \ln K_t \;+\; \beta \ln L_t $$
+      </div>
+      <p>Interpretasi koefisien menjadi sangat intuitif: <strong>koefisien dari ln K adalah α</strong> (elastisitas output terhadap modal), <strong>koefisien dari ln L adalah β</strong> (elastisitas output terhadap pekerja). Konstanta c₀ menangkap rata-rata level teknologi, dan residual εₜ menangkap deviasi tahunan teknologi (cikal-bakal TFP).</p>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card card-em card-tight">
+          <div class="card-title"><span class="tag tag-em">Persamaan A</span><h4>Sisi Penawaran (Supply)</h4></div>
+          <p style="font-size:0.92rem;">Estimasi: berapa kontribusi murni penambahan pekerja terhadap pertumbuhan output?</p>
+          <div class="formula-box" style="margin:14px 0 8px 0; padding:14px;">
+            $$ \ln Y = c_0 + \alpha \ln K + {\color{#2E6B47} \beta} \ln L $$
+          </div>
+          <p style="font-size:0.88rem; color:var(--muted);">Hasil regresi 1986–2025: <strong style="color:var(--ink);">β = 1.7311</strong></p>
+        </div>
+
+        <div class="card card-em card-tight" style="border-left-color: var(--navy);">
+          <div class="card-title"><span class="tag tag-navy">Persamaan B</span><h4>Sisi Permintaan (Demand)</h4></div>
+          <p style="font-size:0.92rem;">Estimasi: berapa lapangan kerja yang <em>dibutuhkan</em> untuk merealisasikan target output?</p>
+          <div class="formula-box" style="margin:14px 0 8px 0; padding:14px;">
+            $$ \ln L = c_0' + \alpha' \ln K + {\color{#2C4970} \beta_{inv}} \ln Y $$
+          </div>
+          <p style="font-size:0.88rem; color:var(--muted);">Hasil regresi 1986–2025: <strong style="color:var(--ink);">β<sub>inv</sub> = 0.3966</strong></p>
+        </div>
+      </div>
+
+      <details>
+        <summary>Mengapa β × β<sub>inv</sub> ≠ 1?</summary>
+        <div class="details-body">
+          <p>Secara intuitif orang mengira jika β = 1.73 (1% L → 1.73% Y), maka kebalikannya adalah 1/1.73 ≈ 0.58, bukan 0.40. <strong>Tetapi itu hanya berlaku jika K dipaksa konstan secara identik di kedua regresi</strong> — sesuatu yang tidak terjadi di OLS standar.</p>
+          <p>Di Persamaan A, ln K adalah <em>control</em> dan ln L adalah <em>regressor</em>. Di Persamaan B posisinya bertukar. Karena ln K berkorelasi (sangat kuat) dengan ln Y dan ln L, varians yang ditangkap masing-masing koefisien <em>asimetris</em>. Inilah salah satu wajah dari "Frisch-Waugh-Lovell theorem" dalam praktik.</p>
+          <p>Implikasi kebijakan: gunakan β untuk pertanyaan <em>"jika kita rekrut X juta, dampaknya ke Y berapa?"</em>; gunakan β<sub>inv</sub> untuk pertanyaan <em>"jika target Y tercapai, berapa kerja terserap?"</em>. <strong>Bukan kebalikan satu sama lain.</strong></p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- LANGKAH 3: SOLOW RESIDUAL -->
+  <div class="method-step">
+    <div class="method-num">03</div>
+    <div class="method-body">
+      <h4>Mengisolasi inovasi dengan Solow residual</h4>
+      <p>Ambil turunan total (atau bedakan log) dari fungsi produksi level. Hasilnya identitas pertumbuhan klasik Solow (1957):</p>
+      <div class="formula-box">
+        <div class="formula-label">Persamaan Growth Accounting</div>
+        $$ \%\Delta Y \;=\; \%\Delta A \;+\; \alpha \cdot \%\Delta K \;+\; \beta \cdot \%\Delta L $$
+      </div>
+      <p>Tiga komponen di kanan adalah <strong>tiga mesin pertumbuhan</strong>: mesin teknologi (%ΔA), mesin investasi (α·%ΔK), dan mesin tenaga kerja (β·%ΔL). %ΔA <strong>tidak dapat diukur langsung</strong> — ia dikenal sebagai <em>Solow residual</em>, dihitung sebagai sisa setelah kontribusi K dan L dikurangkan:</p>
+      <div class="formula-box">
+        $$ \%\Delta A_t \;=\; \%\Delta Y_t \;-\; \alpha \cdot \%\Delta K_t \;-\; \beta \cdot \%\Delta L_t $$
+      </div>
+
+      <div class="card card-note" style="margin-top:16px;">
+        <p style="font-size:0.92rem;"><strong>Catatan transparansi.</strong> Kolom <em>TFP Growth (%)</em> di tabel di bawah memakai elastisitas standar literatur produktivitas Indonesia (income share approach, α≈0.55, β≈0.45), <strong>bukan</strong> β = 1.7311 dari regresi. Alasannya: β regresi sengaja dipilih untuk menangkap <em>elastisitas marginal</em> data 40 tahun, sedangkan growth accounting konvensional pakai <em>share faktor produksi</em> dari neraca nasional. Kedua angka itu menjawab pertanyaan berbeda — penjelasan lengkap pada bagian kalkulator simulasi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGKAH 4: CAGR -->
+  <div class="method-step">
+    <div class="method-num">04</div>
+    <div class="method-body">
+      <h4>Konversi target multi-tahun ke laju majemuk (CAGR)</h4>
+      <p>Pertanyaan kebijakan biasanya berbentuk "buka 19 juta lapangan kerja dalam 5 tahun". Total pertumbuhan Y yang dibutuhkan untuk itu (misal 13%) tidak boleh dibagi rata 13%/5 = 2.6% per tahun, karena efek bunga-berbunga (compounding). Konversi yang benar adalah <em>Compound Annual Growth Rate</em>:</p>
+      <div class="formula-box">
+        <div class="formula-label">Formula CAGR</div>
+        $$ g_{CAGR} \;=\; \left(1 + g_{total}\right)^{1/n} - 1 $$
+      </div>
+      <p>di mana <strong>g<sub>total</sub></strong> adalah akumulasi pertumbuhan yang harus dicapai dan <strong>n</strong> adalah jumlah tahun. Contoh: untuk total 13% selama 5 tahun, CAGR = (1.13)<sup>0.2</sup> − 1 = <span class="mono" style="color:var(--emerald); font-weight:600;">2.47%/tahun</span>, bukan 2.60%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA TABLE ============ -->
+<section id="data">
+  <div class="section-head">
+    <div class="eyebrow">§ 02 · Tabel Data Historis</div>
+    <h2>40 tahun observasi: 1986–2025</h2>
+    <p class="lead">Penduduk bekerja (BPS Sakernas), PDB konstan basis 1986=100 (rekonstruksi dari PDB ADHK BPS), PMTB dalam triliun rupiah (BI/BPS), dan TFP residual (kalkulasi internal).</p>
+  </div>
+
+  <div class="card card-warn" style="margin-bottom:24px;">
+    <p style="font-size:0.92rem;"><strong>Koreksi data dari versi sebelumnya.</strong> Pada baris tahun <strong>2008</strong>, kolom PMTB sebelumnya tercatat <code class="mono" style="background:white; padding:1px 6px; border-radius:3px;">11.370</code> — tidak konsisten dengan ln K = 7.2225 (yang berarti K ≈ 1.371). Nilai sudah dikoreksi menjadi <code class="mono" style="background:white; padding:1px 6px; border-radius:3px;">1.370,9</code>. Selain itu, kolom TFP untuk 2024 & 2025 diisi dengan estimasi internal (rumus Solow, α=0.55, β=0.45) — ditandai dengan italics.</p>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Tahun</th>
+            <th>%ΔY</th>
+            <th>%ΔA <span style="opacity:0.5;">(TFP)</span></th>
+            <th>Pekerja L (juta)</th>
+            <th>%ΔL</th>
+            <th>Indeks Y</th>
+            <th>PMTB K (Rp T)</th>
+            <th>ln Y</th>
+            <th>ln L</th>
+            <th>ln K</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISUALISASI ============ -->
+<section id="visualisasi">
+  <div class="section-head">
+    <div class="eyebrow">§ 03 · Visualisasi Tren</div>
+    <h2>Empat dekade dalam tiga grafik</h2>
+    <p class="lead">Korelasi log-linear yang sangat tinggi antara Y dan L, dinamika tahunan ketiga mesin pertumbuhan, dan dekomposisi rata-rata kontribusi per dekade.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <h4>Korelasi log PDB ↔ log Tenaga Kerja</h4>
+          <div class="chart-meta">OLS · n=40 · R²=0.987</div>
+        </div>
+      </div>
+      <div class="chart-container"><canvas id="chartScatter"></canvas></div>
+      <p class="chart-note">Setiap titik adalah satu tahun. Garis regresi memvisualkan hubungan log-linier yang sangat erat antara ukuran ekonomi dan ukuran angkatan kerja Indonesia.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <h4>Tren pertumbuhan: Y, L, dan TFP</h4>
+          <div class="chart-meta">1987–2023 · annual %</div>
+        </div>
+      </div>
+      <div class="chart-container"><canvas id="chartTrend"></canvas></div>
+      <p class="chart-note">Krisis 1998 (−13.13% PDB, −17.5% TFP) dan Pandemi 2020 (−2.07% PDB) menjadi dua titik balik historis paling tajam.</p>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top:24px;">
+    <div class="chart-header">
+      <div>
+        <h4>Dekomposisi sumber pertumbuhan per dekade</h4>
+        <div class="chart-meta">Rata-rata kontribusi mesin K, L, dan A · α=0.55, β=0.45</div>
+      </div>
+    </div>
+    <div class="chart-container" style="height:340px;"><canvas id="chartDecomp"></canvas></div>
+    <p class="chart-note">Pola jangka panjang Indonesia: kontribusi modal (K) konsisten menjadi mesin utama; kontribusi tenaga kerja (L) menurun secara struktural seiring transisi demografi; kontribusi TFP rendah dan volatil — pekerjaan rumah produktivitas yang belum tuntas.</p>
+  </div>
+</section>
+
+<!-- ============ KALKULATOR ============ -->
+<section id="kalkulator">
+  <div class="section-head">
+    <div class="eyebrow">§ 04 · Kalkulator Kebijakan</div>
+    <h2>Tiga pertanyaan, tiga jawaban yang jelas</h2>
+    <p class="lead">Tiga kalkulator di bawah <strong>tidak saling kebalikan</strong> — masing-masing menjawab pertanyaan kebijakan yang berbeda. Bacalah judul pertanyaannya dulu sebelum memasukkan angka.</p>
+  </div>
+
+  <!-- KALKULATOR 1: DEMAND SIDE -->
+  <div class="calc-block calc-em">
+    <div class="calc-label">
+      <span class="num">A</span>
+      <span class="tag tag-em">Sisi Permintaan</span>
+      <span class="tag">β<sub>inv</sub> = 0.3966</span>
+    </div>
+    <h3>Berapa pertumbuhan ekonomi minimum untuk menyerap target lapangan kerja?</h3>
+    <p class="calc-sub">Gunakan kalkulator ini saat Anda <em>start</em> dari sisi <strong>output ketenagakerjaan</strong> (misal Asta Cita: 19 juta lapangan kerja dalam 5 tahun) dan ingin tahu laju ekonomi yang harus dijaga setiap tahun.</p>
+
+    <div class="calc-q">"Jika Indonesia ingin membuka <strong id="echo-jobs">5.000.000</strong> lapangan kerja netto dalam <strong id="echo-years">1</strong> tahun, ekonomi harus tumbuh berapa persen per tahun?"</div>
+
+    <div class="input-row">
+      <div class="input-field">
+        <label>Target Lapangan Kerja Baru (jiwa, netto)</label>
+        <input type="text" id="inputJobs" value="5.000.000" inputmode="numeric" />
+        <div class="input-help">Penambahan netto dibanding tahun sebelumnya — bukan total rekrutmen kotor. Basis 2025: 146,54 juta pekerja.</div>
+      </div>
+      <div class="input-field">
+        <label>Horizon Waktu (tahun)</label>
+        <input type="number" id="inputYears" value="1" min="1" max="20" step="1" />
+        <div class="input-help">Jumlah tahun untuk mencapai target. Lebih lama → CAGR lebih rendah karena efek bunga-berbunga.</div>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <span class="result-label">Hasil Kalkulasi</span>
+      <div class="result-value" id="resultGrowth">8.60<span class="unit">% per tahun</span></div>
+      <div class="result-detail" id="resultGrowthDetail">
+        Ekonomi Indonesia harus tumbuh konsisten pada laju ini selama horizon waktu di atas, <em>dengan asumsi tidak ada substitusi pekerja oleh otomatisasi/mesin baru</em> (ceteris paribus K). Total kumulatif pertumbuhan: <strong>8.60%</strong>.
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-top:20px; box-shadow:none; border:1px solid var(--rule-2);">
+      <div class="chart-header" style="padding-bottom:8px;">
+        <div><h4 style="font-size:0.95rem;">Proyeksi indeks PDB (Tahun 0 = 100)</h4></div>
+      </div>
+      <div class="chart-container" style="height:240px;"><canvas id="chartCAGR"></canvas></div>
+    </div>
+  </div>
+
+  <!-- KALKULATOR 2: SUPPLY SIDE -->
+  <div class="calc-block calc-navy">
+    <div class="calc-label">
+      <span class="num" style="color:var(--navy);">B</span>
+      <span class="tag tag-navy">Sisi Penawaran</span>
+      <span class="tag">β = 1.7311</span>
+    </div>
+    <h3>Berapa kontribusi murni serapan tenaga kerja terhadap pertumbuhan ekonomi?</h3>
+    <p class="calc-sub">Gunakan kalkulator ini saat Anda <em>start</em> dari sisi <strong>input ketenagakerjaan</strong> (misal proyeksi bonus demografi: 2 juta pekerja muda masuk pasar kerja) dan ingin tahu seberapa besar dorongannya ke PDB.</p>
+
+    <div class="calc-q">"Jika <strong id="echo-jobs2">5.000.000</strong> pekerja baru terserap, berapa persen dorongan murninya ke PDB?"</div>
+
+    <div class="input-row">
+      <div class="input-field">
+        <label>Jumlah Pekerja Baru (jiwa, netto)</label>
+        <input type="text" id="inputJobs2" value="5.000.000" inputmode="numeric" />
+        <div class="input-help">Penambahan agregat pekerja dalam satu tahun.</div>
+      </div>
+      <div class="input-field">
+        <label>Basis Pekerja Saat Ini</label>
+        <input type="text" id="inputBase2" value="146.540.000" readonly style="background:var(--rule-2); cursor:not-allowed;" />
+        <div class="input-help">BPS Sakernas 2025 (Agustus). Hardcoded sebagai denominator.</div>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <span class="result-label">Hasil Kalkulasi</span>
+      <div class="result-value" id="resultContribution">5.91<span class="unit">% kontribusi ke PDB</span></div>
+      <div class="result-detail" id="resultContributionDetail">
+        Pertumbuhan pekerja sebesar <strong id="echoPercL">3.413%</strong>, dikali elastisitas output β=1.7311, menghasilkan dorongan langsung sebesar angka di atas terhadap pertumbuhan PDB tahunan (ceteris paribus K dan A).
+      </div>
+    </div>
+
+    <div class="card card-note" style="margin-top:20px;">
+      <p style="font-size:0.9rem;"><strong>Catatan penting.</strong> β = 1.7311 adalah elastisitas marginal dari regresi 40 tahun — ia mencerminkan bahwa di Indonesia historisnya, penambahan pekerja sering berdampingan dengan akumulasi kapital dan pembelajaran kolektif. Untuk skenario growth accounting konvensional (income-share basis), nilai realistis berada di kisaran 0.45–0.65. Lihat Kalkulator C.</p>
+    </div>
+  </div>
+
+  <!-- KALKULATOR 3: FULL GROWTH ACCOUNTING -->
+  <div class="calc-block calc-gold">
+    <div class="calc-label">
+      <span class="num" style="color:var(--gold);">C</span>
+      <span class="tag tag-gold">Growth Accounting</span>
+      <span class="tag">α + β = 1</span>
+    </div>
+    <h3>Simulasi penuh: kombinasikan ketiga mesin pertumbuhan</h3>
+    <p class="calc-sub">Gunakan kalkulator ini saat Anda merancang <strong>bauran kebijakan</strong> menyeluruh — investasi (K) + serapan pekerja (L) + reformasi/digitalisasi (A) — dan ingin lihat proyeksi total pertumbuhan Y. Spesifikasi income-share standar literatur Indonesia.</p>
+
+    <div class="formula-box" style="margin-bottom:24px;">
+      $$ \%\Delta Y \;=\; \%\Delta A \;+\; \alpha \cdot \%\Delta K \;+\; \beta \cdot \%\Delta L $$
+    </div>
+
+    <div class="input-row">
+      <div class="input-field">
+        <label>α — Share Modal</label>
+        <input type="number" id="inputAlpha" value="0.55" min="0.1" max="0.9" step="0.01" />
+        <div class="input-help">Default 0.55 (rata-rata literatur APO/Bank Dunia Indonesia). β otomatis = 1 − α.</div>
+      </div>
+      <div class="input-field">
+        <label>β — Share Tenaga Kerja (auto)</label>
+        <input type="text" id="inputBeta" value="0.45" readonly style="background:var(--rule-2); cursor:not-allowed;" />
+        <div class="input-help">Otomatis tersesuaikan menjaga α + β = 1 (constant returns to scale).</div>
+      </div>
+    </div>
+
+    <div class="engines-grid">
+      <div class="engine-card eng-l">
+        <h5>Mesin Tenaga Kerja</h5>
+        <div class="engine-sym">%ΔL · pertumbuhan pekerja</div>
+        <input type="number" id="inputDL" value="2.00" step="0.1" />
+        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribL">+0.90%</span></div>
+      </div>
+      <div class="engine-card eng-k">
+        <h5>Mesin Investasi</h5>
+        <div class="engine-sym">%ΔK · pertumbuhan modal</div>
+        <input type="number" id="inputDK" value="5.00" step="0.1" />
+        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribK">+2.75%</span></div>
+      </div>
+      <div class="engine-card eng-a">
+        <h5>Mesin Teknologi (TFP)</h5>
+        <div class="engine-sym">%ΔA · injeksi efisiensi</div>
+        <input type="number" id="inputDA" value="1.00" step="0.1" />
+        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribA">+1.00%</span></div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Bagaimana cara menentukan angka untuk %ΔA (Mesin TFP)?</summary>
+      <div class="details-body">
+        <p>%ΔA tidak punya satuan fisik (bukan ton, bukan orang) — ia mengukur kecepatan inovasi & efisiensi. Tiga skenario yang biasa dipakai:</p>
+        <ul>
+          <li><strong>0.5 – 1.2%</strong> · <em>Business as Usual.</em> Rata-rata historis Indonesia 1990–2023 (APO Productivity Database).</li>
+          <li><strong>1.5 – 2.5%</strong> · <em>Reformasi moderat.</em> Asumsi digitalisasi birokrasi, penurunan ICOR via infrastruktur tol, adopsi teknologi industri 4.0 parsial.</li>
+          <li><strong>2.5 – 4.0%</strong> · <em>Lompatan teknologi.</em> Asumsi adopsi AI agresif, deregulasi besar-besaran, atau resource boom dengan industrialisasi hilir tinggi (preseden: Tiongkok 1995–2005 mencapai ~3.5%).</li>
+        </ul>
+        <p>Atau gunakan <strong>backward induction</strong>: jika Presiden mematok 8% pertumbuhan dan %ΔK + %ΔL hanya mampu menyumbang 5%, maka beban target TFP adalah 3% — angka itu menjadi <em>tugas wajib</em> bagi reformasi struktural.</p>
+      </div>
+    </details>
+
+    <div class="result-card" style="margin-top:24px;">
+      <span class="result-label">Total Proyeksi Pertumbuhan Ekonomi</span>
+      <div class="result-value" id="resultTotal">+4.65<span class="unit">% per tahun</span></div>
+      <div class="result-detail">
+        Hasil kombinasi tiga mesin di atas. Periksa konsistensi dengan rata-rata historis Indonesia 5.0% (2014–2024) untuk memastikan asumsi tidak terlalu optimis atau pesimis.
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-top:24px; box-shadow:none; border:1px solid var(--rule-2);">
+      <div class="chart-header" style="padding-bottom:8px;">
+        <div><h4 style="font-size:0.95rem;">Komposisi penyusun pertumbuhan</h4></div>
+      </div>
+      <div class="chart-container" style="height:300px;"><canvas id="chartWaterfall"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-mark">
+    <div class="footer-title">💡 Semua Bisa Dihitung</div>
+    <div class="footer-by">by Alif Hijriah · @aliftowew</div>
+  </div>
+  <div class="footer-sources">
+    Sumber data: BPS Sakernas · BPS PDB ADHK · Bank Indonesia PMTB · APO Productivity Database
+  </div>
+</footer>
+
+</div><!-- /.container -->
+
+<script>
+/* =================================================================
+   DATA HISTORIS 1986-2025 (40 OBSERVASI)
+   Koreksi: 2008 K dari 11370 → 1370.9 (typo asli, tidak konsisten dgn ln K)
+   TFP 2024-2025: estimasi Solow α=0.55, β=0.45 (italic di tabel)
+   ================================================================= */
+const DATA = [
+  // {tahun, dY, tfp, L, dL(auto), Y, K, lnY, lnL, lnK}
+  {t:1986, dY:5.88, tfp:null,   L:65655030, Y:105.88, K:26.2,    lnY:4.6623, lnL:17.9999, lnK:3.2657, est:false},
+  {t:1987, dY:4.93, tfp:-1.774, L:67878350, Y:111.10, K:31.42,   lnY:4.7104, lnL:18.0332, lnK:3.4474, est:false},
+  {t:1988, dY:5.78, tfp:-2.231, L:69828230, Y:117.52, K:38.36,   lnY:4.7666, lnL:18.0615, lnK:3.6470, est:false},
+  {t:1989, dY:7.46, tfp:-0.184, L:70743560, Y:126.29, K:47.71,   lnY:4.8385, lnL:18.0745, lnK:3.8651, est:false},
+  {t:1990, dY:7.24, tfp:0.516,  L:75850000, Y:135.43, K:59.76,   lnY:4.9084, lnL:18.1442, lnK:4.0903, est:false},
+  {t:1991, dY:8.93, tfp:1.961,  L:76420000, Y:147.52, K:67.49,   lnY:4.9939, lnL:18.1517, lnK:4.2119, est:false},
+  {t:1992, dY:6.52, tfp:1.422,  L:78520000, Y:157.15, K:72.77,   lnY:5.0571, lnL:18.1788, lnK:4.2873, est:false},
+  {t:1993, dY:7.96, tfp:1.698,  L:79200000, Y:169.65, K:86.67,   lnY:5.1337, lnL:18.1874, lnK:4.4621, est:false},
+  {t:1994, dY:7.54, tfp:-0.742, L:82040000, Y:182.44, K:105.38,  lnY:5.2064, lnL:18.2227, lnK:4.6575, est:false},
+  {t:1995, dY:8.22, tfp:1.255,  L:80110000, Y:197.44, K:129.22,  lnY:5.2854, lnL:18.1989, lnK:4.8615, est:false},
+  {t:1996, dY:7.82, tfp:0.573,  L:85702000, Y:212.87, K:157.65,  lnY:5.3606, lnL:18.2663, lnK:5.0603, est:false},
+  {t:1997, dY:4.70, tfp:-2.124, L:87050000, Y:222.88, K:177.69,  lnY:5.4066, lnL:18.2819, lnK:5.1800, est:false},
+  {t:1998, dY:-13.13,tfp:-17.485,L:87672000, Y:193.62, K:243.04, lnY:5.2659, lnL:18.2891, lnK:5.4932, est:false},
+  {t:1999, dY:0.79, tfp:-2.138, L:88817000, Y:195.15, K:221.47,  lnY:5.2737, lnL:18.3020, lnK:5.4002, est:false},
+  {t:2000, dY:4.92, tfp:1.221,  L:89837700, Y:204.75, K:275.88,  lnY:5.3218, lnL:18.3135, lnK:5.6199, est:false},
+  {t:2001, dY:3.64, tfp:0.001,  L:90807400, Y:212.22, K:323.88,  lnY:5.3576, lnL:18.3242, lnK:5.7803, est:false},
+  {t:2002, dY:4.50, tfp:2.072,  L:91647200, Y:221.76, K:353.97,  lnY:5.4016, lnL:18.3334, lnK:5.8692, est:false},
+  {t:2003, dY:4.78, tfp:1.094,  L:90784900, Y:232.36, K:392.79,  lnY:5.4483, lnL:18.3240, lnK:5.9732, est:false},
+  {t:2004, dY:5.03, tfp:0.910,  L:93722000, Y:244.05, K:515.38,  lnY:5.4973, lnL:18.3558, lnK:6.2449, est:false},
+  {t:2005, dY:5.69, tfp:2.432,  L:94453000, Y:257.95, K:655.85,  lnY:5.5527, lnL:18.3636, lnK:6.4859, est:false},
+  {t:2006, dY:5.50, tfp:1.731,  L:95317000, Y:272.14, K:805.79,  lnY:5.6063, lnL:18.3727, lnK:6.6918, est:false},
+  {t:2007, dY:6.35, tfp:0.594,  L:98757000, Y:289.40, K:985.63,  lnY:5.6678, lnL:18.4081, lnK:6.8932, est:false},
+  {t:2008, dY:6.01, tfp:1.113,  L:102301000,Y:306.81, K:1370.9,  lnY:5.7262, lnL:18.4434, lnK:7.2225, est:false}, // KOREKSI
+  {t:2009, dY:4.70, tfp:0.212,  L:104678000,Y:321.23, K:1740,    lnY:5.7721, lnL:18.4663, lnK:7.4616, est:false},
+  {t:2010, dY:6.38, tfp:0.914,  L:107807000,Y:341.72, K:2130,    lnY:5.8339, lnL:18.4958, lnK:7.6638, est:false},
+  {t:2011, dY:6.17, tfp:3.062,  L:110475000,Y:362.80, K:2450,    lnY:5.8938, lnL:18.5203, lnK:7.8038, est:false},
+  {t:2012, dY:6.03, tfp:1.944,  L:111806000,Y:384.68, K:2820,    lnY:5.9524, lnL:18.5322, lnK:7.9444, est:false},
+  {t:2013, dY:5.56, tfp:4.259,  L:110800000,Y:406.06, K:3050,    lnY:6.0065, lnL:18.5232, lnK:8.0228, est:false},
+  {t:2014, dY:5.01, tfp:-0.479, L:114610000,Y:426.39, K:3440,    lnY:6.0553, lnL:18.5570, lnK:8.1432, est:false},
+  {t:2015, dY:4.88, tfp:0.438,  L:114800000,Y:447.18, K:3780,    lnY:6.1029, lnL:18.5587, lnK:8.2374, est:false},
+  {t:2016, dY:5.03, tfp:1.666,  L:118410000,Y:469.69, K:4040,    lnY:6.1520, lnL:18.5896, lnK:8.3039, est:false},
+  {t:2017, dY:5.07, tfp:1.183,  L:121020000,Y:493.50, K:4370,    lnY:6.2015, lnL:18.6114, lnK:8.3825, est:false},
+  {t:2018, dY:5.17, tfp:1.950,  L:124010000,Y:519.04, K:4790,    lnY:6.2519, lnL:18.6358, lnK:8.4742, est:false},
+  {t:2019, dY:5.02, tfp:0.194,  L:126510000,Y:545.09, K:5120,    lnY:6.3009, lnL:18.6558, lnK:8.5409, est:false},
+  {t:2020, dY:-2.07,tfp:-2.721, L:128450000,Y:533.83, K:4900,    lnY:6.2800, lnL:18.6710, lnK:8.4969, est:false},
+  {t:2021, dY:3.70, tfp:1.980,  L:131050000,Y:553.60, K:5230,    lnY:6.3164, lnL:18.6910, lnK:8.5621, est:false},
+  {t:2022, dY:5.31, tfp:-0.958, L:135300000,Y:582.98, K:5696,    lnY:6.3681, lnL:18.7230, lnK:8.6475, est:false},
+  {t:2023, dY:5.05, tfp:0.515,  L:139850000,Y:612.41, K:6090,    lnY:6.4174, lnL:18.7560, lnK:8.7145, est:false},
+  {t:2024, dY:5.03, tfp:0.22,   L:144640000,Y:643.22, K:6452,    lnY:6.4664, lnL:18.7897, lnK:8.7722, est:true},  // ESTIMASI
+  {t:2025, dY:5.11, tfp:1.11,   L:146540000,Y:676.08, K:6852,    lnY:6.5163, lnL:18.8028, lnK:8.8323, est:true},  // ESTIMASI
+];
+
+// Hitung %dL
+for (let i = 0; i < DATA.length; i++) {
+  if (i === 0) DATA[i].dL = null;
+  else DATA[i].dL = ((DATA[i].L - DATA[i-1].L) / DATA[i-1].L) * 100;
+}
+
+/* =================================================================
+   KONSTANTA EKONOMETRIK
+   ================================================================= */
+const BASE_PEKERJA_2025 = 146540000;
+const BETA_OUTPUT = 1.7311;      // Persamaan A: ln Y = c0 + α ln K + β ln L
+const BETA_INVERSE = 0.3966437;  // Persamaan B: ln L = c0' + α' ln K + β_inv ln Y
+
+/* =================================================================
+   HELPERS
+   ================================================================= */
+const fmtID = (n, dec = 0) => {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  const parts = Math.abs(n).toFixed(dec).split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const result = parts.join(',');
+  return n < 0 ? '−' + result : result;
+};
+const fmtPct = (n, dec = 2) => {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return n.toFixed(dec).replace('.', ',') + '%';
+};
+const parseJiwa = s => parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0;
+
+/* =================================================================
+   RENDER TABLE
+   ================================================================= */
+function renderTable() {
+  const tbody = document.querySelector('#dataTable tbody');
+  let html = '';
+  DATA.forEach(d => {
+    const dYClass = d.dY > 0 ? 'td-pos' : (d.dY < 0 ? 'td-neg' : '');
+    const tfpClass = d.tfp === null ? 'td-na' : (d.tfp > 0 ? 'td-pos' : (d.tfp < 0 ? 'td-neg' : ''));
+    const dLClass = d.dL === null ? 'td-na' : (d.dL > 0 ? '' : 'td-neg');
+    const tfpDisp = d.tfp === null ? '—' : (d.est ? `<em>${fmtPct(d.tfp, 2)}</em>` : fmtPct(d.tfp, 2));
+    html += `<tr>
+      <td>${d.t}</td>
+      <td class="${dYClass}">${fmtPct(d.dY, 2)}</td>
+      <td class="${tfpClass}">${tfpDisp}</td>
+      <td>${fmtID(d.L / 1000000, 2)}</td>
+      <td class="${dLClass}">${d.dL === null ? '—' : fmtPct(d.dL, 2)}</td>
+      <td>${fmtID(d.Y, 2)}</td>
+      <td>${fmtID(d.K, 1)}</td>
+      <td>${d.lnY.toFixed(4)}</td>
+      <td>${d.lnL.toFixed(4)}</td>
+      <td>${d.lnK.toFixed(4)}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+/* =================================================================
+   CHARTS
+   ================================================================= */
+Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#6B6358';
+Chart.defaults.borderColor = '#E0D8C6';
+
+// CHART 1: SCATTER ln Y vs ln L
+function chartScatter() {
+  const ctx = document.getElementById('chartScatter').getContext('2d');
+  const points = DATA.map(d => ({x: d.lnY, y: d.lnL, label: d.t}));
+
+  // OLS regression for trendline
+  const n = points.length;
+  const sumX = points.reduce((s, p) => s + p.x, 0);
+  const sumY = points.reduce((s, p) => s + p.y, 0);
+  const sumXY = points.reduce((s, p) => s + p.x * p.y, 0);
+  const sumX2 = points.reduce((s, p) => s + p.x * p.x, 0);
+  const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  const intercept = (sumY - slope * sumX) / n;
+  const xMin = Math.min(...points.map(p => p.x));
+  const xMax = Math.max(...points.map(p => p.x));
+  const trendData = [
+    {x: xMin, y: slope * xMin + intercept},
+    {x: xMax, y: slope * xMax + intercept}
+  ];
+
+  new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Observasi',
+          data: points,
+          backgroundColor: 'rgba(46,107,71,0.55)',
+          borderColor: '#2E6B47',
+          borderWidth: 1.5,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+        },
+        {
+          label: 'OLS Trendline',
+          type: 'line',
+          data: trendData,
+          borderColor: '#B84A3B',
+          borderWidth: 2,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: {size: 11} } },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              if (ctx.dataset.label === 'Observasi') {
+                return `${ctx.raw.label}: ln Y=${ctx.parsed.x.toFixed(4)}, ln L=${ctx.parsed.y.toFixed(4)}`;
+              }
+              return null;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'ln Y (log Indeks PDB)' }, grid: { color: '#EEE7D6' } },
+        y: { title: { display: true, text: 'ln L (log Penduduk Bekerja)' }, grid: { color: '#EEE7D6' } }
+      }
+    }
+  });
+}
+
+// CHART 2: TREND
+function chartTrend() {
+  const ctx = document.getElementById('chartTrend').getContext('2d');
+  const filtered = DATA.filter(d => d.tfp !== null);
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: filtered.map(d => d.t),
+      datasets: [
+        {
+          label: '%ΔY · Pertumbuhan Ekonomi',
+          data: filtered.map(d => d.dY),
+          borderColor: '#2E6B47', backgroundColor: 'rgba(46,107,71,0.08)',
+          borderWidth: 2.5, pointRadius: 2.5, pointHoverRadius: 5,
+          tension: 0.25, fill: false,
+        },
+        {
+          label: '%ΔL · Pertumbuhan Pekerja',
+          data: filtered.map(d => d.dL),
+          borderColor: '#2C4970', backgroundColor: 'rgba(44,73,112,0.08)',
+          borderWidth: 2, pointRadius: 2, pointHoverRadius: 4,
+          tension: 0.25, fill: false,
+        },
+        {
+          label: '%ΔA · TFP (Inovasi)',
+          data: filtered.map(d => d.tfp),
+          borderColor: '#B84A3B', backgroundColor: 'rgba(184,74,59,0.08)',
+          borderWidth: 1.8, borderDash: [5, 3], pointRadius: 2, pointHoverRadius: 4,
+          tension: 0.25, fill: false,
+        },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: {size: 11} } },
+        annotation: {
+          annotations: {
+            crisis98: {
+              type: 'line', xMin: '1998', xMax: '1998',
+              borderColor: 'rgba(184,74,59,0.4)', borderWidth: 1, borderDash: [3, 3],
+              label: { content: 'Krisis 98', display: true, position: 'start', font: {size: 10}, color: '#B84A3B', backgroundColor: 'rgba(0,0,0,0)' }
+            },
+            covid20: {
+              type: 'line', xMin: '2020', xMax: '2020',
+              borderColor: 'rgba(184,74,59,0.4)', borderWidth: 1, borderDash: [3, 3],
+              label: { content: 'Pandemi 20', display: true, position: 'start', font: {size: 10}, color: '#B84A3B', backgroundColor: 'rgba(0,0,0,0)' }
+            },
+            zero: {
+              type: 'line', yMin: 0, yMax: 0,
+              borderColor: 'rgba(26,24,20,0.3)', borderWidth: 1,
+            }
+          }
+        }
+      },
+      scales: {
+        y: { title: { display: true, text: 'Persentase (%)' }, grid: { color: '#EEE7D6' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// CHART 3: DECADE DECOMPOSITION
+function chartDecomp() {
+  const ctx = document.getElementById('chartDecomp').getContext('2d');
+  const ALPHA_DECOMP = 0.55, BETA_DECOMP = 0.45;
+  const decades = [
+    {label: '1987-1996', range: [1987, 1996]},
+    {label: '1997-2006', range: [1997, 2006]},
+    {label: '2007-2016', range: [2007, 2016]},
+    {label: '2017-2025', range: [2017, 2025]},
+  ];
+
+  const contribL = [], contribK = [], contribA = [], totalY = [];
+  decades.forEach(d => {
+    const subset = DATA.filter(x => x.t >= d.range[0] && x.t <= d.range[1] && x.tfp !== null && x.dL !== null);
+    // for each year compute contributions
+    let sumL = 0, sumK = 0, sumA = 0, sumY = 0, n = 0;
+    subset.forEach(x => {
+      // Compute %ΔK
+      const idx = DATA.findIndex(y => y.t === x.t);
+      if (idx > 0) {
+        const dK = ((DATA[idx].K - DATA[idx-1].K) / DATA[idx-1].K) * 100;
+        sumL += BETA_DECOMP * x.dL;
+        sumK += ALPHA_DECOMP * dK;
+        sumA += x.tfp;
+        sumY += x.dY;
+        n++;
+      }
+    });
+    contribL.push(sumL / n);
+    contribK.push(sumK / n);
+    contribA.push(sumA / n);
+    totalY.push(sumY / n);
+  });
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: decades.map(d => d.label),
+      datasets: [
+        {
+          label: 'Mesin Tenaga Kerja (β·%ΔL)',
+          data: contribL,
+          backgroundColor: '#4A6B95',
+          borderColor: '#2C4970', borderWidth: 1,
+          stack: 'a',
+        },
+        {
+          label: 'Mesin Investasi (α·%ΔK)',
+          data: contribK,
+          backgroundColor: '#D4AD52',
+          borderColor: '#B8923C', borderWidth: 1,
+          stack: 'a',
+        },
+        {
+          label: 'Mesin Teknologi (%ΔA)',
+          data: contribA,
+          backgroundColor: '#B84A3B',
+          borderColor: '#8E3829', borderWidth: 1,
+          stack: 'a',
+        },
+        {
+          label: 'Total Pertumbuhan Y (aktual)',
+          data: totalY,
+          type: 'line',
+          borderColor: '#1A1814', backgroundColor: '#1A1814',
+          borderWidth: 2.5, pointRadius: 5, pointStyle: 'rectRot',
+          tension: 0,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: {size: 11} } } },
+      scales: {
+        y: { stacked: true, title: { display: true, text: 'Rata-rata kontribusi (%)' }, grid: { color: '#EEE7D6' } },
+        x: { stacked: true, grid: { display: false } }
+      }
+    }
+  });
+}
+
+let chartCAGRInstance = null;
+function chartCAGR(cagr, years) {
+  const ctx = document.getElementById('chartCAGR').getContext('2d');
+  const labels = [];
+  const data = [];
+  for (let i = 0; i <= years; i++) {
+    labels.push(`T+${i}`);
+    data.push(100 * Math.pow(1 + cagr, i));
+  }
+  if (chartCAGRInstance) chartCAGRInstance.destroy();
+  chartCAGRInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Indeks PDB',
+        data, borderColor: '#2E6B47', backgroundColor: 'rgba(46,107,71,0.12)',
+        borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 6, fill: true, tension: 0.2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { title: { display: true, text: 'Indeks (Tahun 0 = 100)' }, grid: { color: '#EEE7D6' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+let chartWaterfallInstance = null;
+function chartWaterfall(cL, cK, cA, total) {
+  const ctx = document.getElementById('chartWaterfall').getContext('2d');
+  if (chartWaterfallInstance) chartWaterfallInstance.destroy();
+  chartWaterfallInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mesin Pekerja (L)', 'Mesin Modal (K)', 'Mesin Teknologi (A)', 'TOTAL'],
+      datasets: [{
+        label: 'Kontribusi ke %ΔY',
+        data: [cL, cK, cA, total],
+        backgroundColor: ['#4A6B95', '#D4AD52', '#B84A3B', '#1A1814'],
+        borderColor: ['#2C4970', '#B8923C', '#8E3829', '#000'],
+        borderWidth: 1.5,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.parsed.y.toFixed(2)}%` } }
+      },
+      scales: {
+        y: { title: { display: true, text: 'Persentase pertumbuhan Y (%)' }, grid: { color: '#EEE7D6' }, beginAtZero: true },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+/* =================================================================
+   KALKULATOR A: TARGET JOBS → REQUIRED GROWTH
+   ================================================================= */
+function calcA() {
+  const jobs = parseJiwa(document.getElementById('inputJobs').value);
+  const years = parseInt(document.getElementById('inputYears').value) || 1;
+
+  // Format echo
+  document.getElementById('echo-jobs').textContent = fmtID(jobs);
+  document.getElementById('echo-years').textContent = years;
+
+  if (jobs <= 0 || years < 1) {
+    document.getElementById('resultGrowth').innerHTML = '—';
+    return;
+  }
+
+  const pctJobs = (jobs / BASE_PEKERJA_2025);
+  const totalGrowthY = pctJobs / BETA_INVERSE;
+  const cagr = Math.pow(1 + totalGrowthY, 1 / years) - 1;
+
+  document.getElementById('resultGrowth').innerHTML =
+    `${(cagr * 100).toFixed(2).replace('.', ',')}<span class="unit">% per tahun</span>`;
+
+  document.getElementById('resultGrowthDetail').innerHTML =
+    `Ekonomi Indonesia harus tumbuh konsisten pada laju ini selama ${years} tahun, <em>dengan asumsi ceteris paribus K</em>. ` +
+    `Total kumulatif pertumbuhan PDB yang dibutuhkan: <strong>${(totalGrowthY * 100).toFixed(2).replace('.',',')}%</strong>. ` +
+    `Pertumbuhan pekerja yang diperlukan: <strong>${(pctJobs * 100).toFixed(3).replace('.', ',')}%</strong> selama horizon waktu.`;
+
+  chartCAGR(cagr, years);
+}
+
+document.getElementById('inputJobs').addEventListener('input', function() {
+  // Format with thousand separator
+  let val = this.value.replace(/[^\d]/g, '');
+  if (val) {
+    val = parseInt(val).toLocaleString('id-ID');
+    this.value = val;
+  }
+  calcA();
+});
+document.getElementById('inputYears').addEventListener('input', calcA);
+
+/* =================================================================
+   KALKULATOR B: JOBS ADDED → GROWTH CONTRIBUTION
+   ================================================================= */
+function calcB() {
+  const jobs = parseJiwa(document.getElementById('inputJobs2').value);
+  document.getElementById('echo-jobs2').textContent = fmtID(jobs);
+
+  const pctL = (jobs / BASE_PEKERJA_2025);
+  const dY = pctL * BETA_OUTPUT;
+
+  document.getElementById('resultContribution').innerHTML =
+    `+${(dY * 100).toFixed(2).replace('.', ',')}<span class="unit">% kontribusi ke PDB</span>`;
+  document.getElementById('echoPercL').textContent = `${(pctL * 100).toFixed(3).replace('.', ',')}%`;
+}
+
+document.getElementById('inputJobs2').addEventListener('input', function() {
+  let val = this.value.replace(/[^\d]/g, '');
+  if (val) {
+    val = parseInt(val).toLocaleString('id-ID');
+    this.value = val;
+  }
+  calcB();
+});
+
+/* =================================================================
+   KALKULATOR C: FULL GROWTH ACCOUNTING
+   ================================================================= */
+function calcC() {
+  let alpha = parseFloat(document.getElementById('inputAlpha').value);
+  if (isNaN(alpha) || alpha < 0.1) alpha = 0.55;
+  if (alpha > 0.9) alpha = 0.9;
+  const beta = 1 - alpha;
+  document.getElementById('inputBeta').value = beta.toFixed(2);
+
+  const dL = parseFloat(document.getElementById('inputDL').value) || 0;
+  const dK = parseFloat(document.getElementById('inputDK').value) || 0;
+  const dA = parseFloat(document.getElementById('inputDA').value) || 0;
+
+  const cL = beta * dL;
+  const cK = alpha * dK;
+  const cA = dA;
+  const total = cL + cK + cA;
+
+  document.getElementById('contribL').textContent = (cL >= 0 ? '+' : '') + cL.toFixed(2).replace('.', ',') + '%';
+  document.getElementById('contribK').textContent = (cK >= 0 ? '+' : '') + cK.toFixed(2).replace('.', ',') + '%';
+  document.getElementById('contribA').textContent = (cA >= 0 ? '+' : '') + cA.toFixed(2).replace('.', ',') + '%';
+
+  document.getElementById('resultTotal').innerHTML =
+    `${total >= 0 ? '+' : ''}${total.toFixed(2).replace('.', ',')}<span class="unit">% per tahun</span>`;
+
+  chartWaterfall(cL, cK, cA, total);
+}
+
+['inputAlpha', 'inputDL', 'inputDK', 'inputDA'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calcC);
+});
+
+/* =================================================================
+   INIT
+   ================================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  renderTable();
+  chartScatter();
+  chartTrend();
+  chartDecomp();
+  calcA();
+  calcB();
+  calcC();
+});
+
+// Trigger immediately if DOM already loaded
+if (document.readyState === 'loading') {
+  // wait for DOMContentLoaded
+} else {
+  renderTable();
+  chartScatter();
+  chartTrend();
+  chartDecomp();
+  calcA();
+  calcB();
+  calcC();
+}
+</script>
+
+</body>
+</html>
