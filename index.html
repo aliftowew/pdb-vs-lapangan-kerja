@@ -322,6 +322,59 @@ section {
   font-style: italic;
   line-height: 1.5;
 }
+.paradigm-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--muted-2);
+  font-weight: 500;
+}
+
+.paradigm-note {
+  margin-top: 28px;
+  padding: 26px 30px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+.paradigm-note .card-title { margin-bottom: 14px; }
+.paradigm-p {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  margin-bottom: 14px;
+}
+.paradigm-p strong { color: var(--ink); }
+.paradigm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+@media (max-width: 700px) {
+  .paradigm-grid { grid-template-columns: 1fr; }
+}
+.paradigm-col {
+  padding: 16px 18px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.paradigm-col-head {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.paradigm-col p {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
 
 /* ============ TABLE ============ */
 .table-wrap {
@@ -715,7 +768,7 @@ footer::before {
     <div class="stat">
       <div class="stat-label">Elastisitas Output Tenaga Kerja</div>
       <div class="stat-value mono">β = 1,7311</div>
-      <div class="stat-caption">+1% pekerja → +1,73% PDB (ceteris paribus K).</div>
+      <div class="stat-caption">+1% pekerja → +1,73% PDB.</div>
     </div>
     <div class="stat">
       <div class="stat-label">Elastisitas Permintaan Pekerja</div>
@@ -740,7 +793,7 @@ footer::before {
   <div class="section-head">
     <div class="eyebrow">§ 01 · Kerangka Teori</div>
     <h2>Fungsi Produksi Cobb-Douglas Multivariat</h2>
-    <p class="lead">Output (Y) sebagai interaksi tiga input — Teknologi (A), Modal (K), Tenaga Kerja (L). Estimasi log-linier 40 tahun data menghasilkan tiga elastisitas struktural.</p>
+    <p class="lead">Output (Y) sebagai interaksi tiga input — Teknologi (A), Modal (K), Tenaga Kerja (L). Estimasi log-linier 40 tahun data Indonesia menghasilkan dua elastisitas struktural.</p>
   </div>
 
   <div class="master-formula">
@@ -748,11 +801,14 @@ footer::before {
     $$ Y_t \;=\; A_t \cdot K_t^{\alpha} \cdot L_t^{\beta} \;\;\;\Longleftrightarrow\;\;\; \ln Y_t \;=\; \ln A_t + \alpha \ln K_t + \beta \ln L_t $$
   </div>
 
-  <div class="grid-3">
+  <div class="grid-2">
     <div class="card card-em">
-      <div class="card-title"><span class="tag tag-em">Persamaan A</span></div>
+      <div class="card-title">
+        <span class="tag tag-em">Persamaan A</span>
+        <span class="paradigm-mark">REGRESI OLS · n=40</span>
+      </div>
       <h4>Elastisitas Output Tenaga Kerja</h4>
-      <p class="card-desc">Sumbangan murni penambahan pekerja terhadap pertumbuhan output.</p>
+      <p class="card-desc">Sumbangan murni penambahan pekerja terhadap pertumbuhan output, dengan modal (K) sebagai kontrol.</p>
       <div class="formula-box-inner">$$ \ln Y = c_0 + \alpha \ln K + \beta \ln L $$</div>
       <div class="elasticity-result">
         <span class="elast-label">β =</span>
@@ -762,27 +818,18 @@ footer::before {
     </div>
 
     <div class="card card-navy">
-      <div class="card-title"><span class="tag tag-navy">Persamaan B</span></div>
+      <div class="card-title">
+        <span class="tag tag-navy">Persamaan B</span>
+        <span class="paradigm-mark">REGRESI OLS · n=40</span>
+      </div>
       <h4>Elastisitas Permintaan Pekerja</h4>
-      <p class="card-desc">Lapangan kerja yang muncul dari setiap target pertumbuhan output.</p>
+      <p class="card-desc">Lapangan kerja yang muncul dari setiap target pertumbuhan output, dengan modal (K) sebagai kontrol.</p>
       <div class="formula-box-inner">$$ \ln L = c_0' + \alpha' \ln K + \beta_{inv} \ln Y $$</div>
       <div class="elasticity-result">
         <span class="elast-label">β<sub>inv</sub> =</span>
         <span class="elast-value tone-navy">0,3966</span>
       </div>
       <p class="card-interp">+1% PDB → +0,40% lapangan kerja</p>
-    </div>
-
-    <div class="card card-gold">
-      <div class="card-title"><span class="tag tag-gold">Identitas Growth</span></div>
-      <h4>Dekomposisi Solow</h4>
-      <p class="card-desc">Diferensiasi total persamaan master memberikan identitas pertumbuhan dinamis.</p>
-      <div class="formula-box-inner">$$ \%\Delta Y = \%\Delta A + \alpha \%\Delta K + \beta \%\Delta L $$</div>
-      <div class="elasticity-result">
-        <span class="elast-label">α + β =</span>
-        <span class="elast-value tone-gold">1,00</span>
-      </div>
-      <p class="card-interp">α = 0,55 · β = 0,45 (income-share APO)</p>
     </div>
   </div>
 </section>
@@ -792,7 +839,7 @@ footer::before {
   <div class="section-head">
     <div class="eyebrow">§ 02 · Tabel Data Historis</div>
     <h2>40 tahun observasi · 1986–2025</h2>
-    <p class="lead">Penduduk bekerja (BPS Sakernas), PDB konstan basis 1986=100, PMTB triliun rupiah (BI/BPS), dan TFP residual Solow (α=0,55, β=0,45).</p>
+    <p class="lead">Penduduk bekerja (BPS Sakernas), PDB konstan basis 1986=100, PMTB triliun rupiah (BI/BPS), dan TFP residual Solow (α=0,55, β=0,45 — konvensi APO untuk komparabilitas internasional).</p>
   </div>
 
   <div class="table-wrap">
@@ -854,7 +901,7 @@ footer::before {
     <div class="chart-header">
       <div>
         <h4>Dekomposisi sumber pertumbuhan per dekade</h4>
-        <div class="chart-meta">Rata-rata kontribusi mesin K, L, dan A · α=0,55, β=0,45</div>
+        <div class="chart-meta">Rata-rata kontribusi mesin K, L, dan A · α=0,0871, β=1,7311 (regresi)</div>
       </div>
     </div>
     <div class="chart-container" style="height:340px;"><canvas id="chartDecomp"></canvas></div>
@@ -950,10 +997,10 @@ footer::before {
     <div class="calc-label">
       <span class="num" style="color:var(--gold);">C</span>
       <span class="tag tag-gold">Growth Accounting</span>
-      <span class="tag">α + β = 1</span>
+      <span class="tag">α = 0,087 · β = 1,7311</span>
     </div>
     <h3>Simulasi bauran tiga mesin pertumbuhan</h3>
-    <p class="calc-sub">Kombinasi modal (K), tenaga kerja (L), dan teknologi (A) ke total pertumbuhan PDB tahunan — spesifikasi income-share standar.</p>
+    <p class="calc-sub">Kombinasi modal (K), tenaga kerja (L), dan teknologi (A) ke total pertumbuhan PDB tahunan — memakai elastisitas dari regresi Persamaan A (1986–2025).</p>
 
     <div class="formula-box-inner" style="margin: 0 0 26px 0; padding: 18px;">
       $$ \%\Delta Y \;=\; \%\Delta A \;+\; \alpha \cdot \%\Delta K \;+\; \beta \cdot \%\Delta L $$
@@ -961,14 +1008,14 @@ footer::before {
 
     <div class="input-row">
       <div class="input-field">
-        <label>α — Share Modal</label>
-        <input type="number" id="inputAlpha" value="0.55" min="0.1" max="0.9" step="0.01" />
-        <div class="input-help">Default 0,55 (rata-rata literatur APO/Bank Dunia). β otomatis = 1 − α.</div>
+        <label>α — Elastisitas Modal</label>
+        <input type="number" id="inputAlpha" value="0.0871" min="0" max="2" step="0.001" />
+        <div class="input-help">Default 0,0871 (regresi Persamaan A). Multicollinearity tinggi K↔L membuat efek marjinal murni K kecil di data Indonesia.</div>
       </div>
       <div class="input-field">
-        <label>β — Share Tenaga Kerja (auto)</label>
-        <input type="text" id="inputBeta" value="0.45" readonly style="background:var(--rule-2); cursor:not-allowed;" />
-        <div class="input-help">Otomatis tersesuaikan menjaga constant returns to scale.</div>
+        <label>β — Elastisitas Tenaga Kerja</label>
+        <input type="number" id="inputBeta" value="1.7311" min="0" max="3" step="0.001" />
+        <div class="input-help">Default 1,7311 (regresi Persamaan A). Editable bila ingin uji skenario alternatif.</div>
       </div>
     </div>
 
@@ -977,13 +1024,13 @@ footer::before {
         <h5>Mesin Tenaga Kerja</h5>
         <div class="engine-sym">%ΔL · pertumbuhan pekerja</div>
         <input type="number" id="inputDL" value="2.00" step="0.1" />
-        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribL">+0,90%</span></div>
+        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribL">+3,46%</span></div>
       </div>
       <div class="engine-card eng-k">
         <h5>Mesin Investasi</h5>
         <div class="engine-sym">%ΔK · pertumbuhan modal</div>
         <input type="number" id="inputDK" value="5.00" step="0.1" />
-        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribK">+2,75%</span></div>
+        <div class="engine-contribution">→ Dorongan ke Y: <span class="val" id="contribK">+0,44%</span></div>
       </div>
       <div class="engine-card eng-a">
         <h5>Mesin Teknologi (TFP)</h5>
@@ -1004,7 +1051,7 @@ footer::before {
 
     <div class="result-card" style="margin-top:24px;">
       <span class="result-label">Total Proyeksi Pertumbuhan Ekonomi</span>
-      <div class="result-value" id="resultTotal">+4,65<span class="unit">% per tahun</span></div>
+      <div class="result-value" id="resultTotal">+4,90<span class="unit">% per tahun</span></div>
       <div class="result-detail">
         Hasil kombinasi tiga mesin di atas. Bandingkan dengan rata-rata historis Indonesia 5,0% (2014–2024) untuk uji konsistensi asumsi.
       </div>
@@ -1305,7 +1352,7 @@ function chartTrend() {
 // CHART 3: DECADE DECOMPOSITION
 function chartDecomp() {
   const ctx = document.getElementById('chartDecomp').getContext('2d');
-  const ALPHA_DECOMP = 0.55, BETA_DECOMP = 0.45;
+  const ALPHA_DECOMP = 0.0871, BETA_DECOMP = 1.7311;
   const decades = [
     {label: '1987-1996', range: [1987, 1996]},
     {label: '1997-2006', range: [1997, 2006]},
@@ -1315,15 +1362,18 @@ function chartDecomp() {
 
   const contribL = [], contribK = [], contribA = [], totalY = [];
   decades.forEach(d => {
-    const subset = DATA.filter(x => x.t >= d.range[0] && x.t <= d.range[1] && x.tfp !== null && x.dL !== null);
+    const subset = DATA.filter(x => x.t >= d.range[0] && x.t <= d.range[1] && x.dL !== null);
     let sumL = 0, sumK = 0, sumA = 0, sumY = 0, n = 0;
     subset.forEach(x => {
       const idx = DATA.findIndex(y => y.t === x.t);
       if (idx > 0) {
         const dK = ((DATA[idx].K - DATA[idx-1].K) / DATA[idx-1].K) * 100;
-        sumL += BETA_DECOMP * x.dL;
-        sumK += ALPHA_DECOMP * dK;
-        sumA += x.tfp;
+        const cL = BETA_DECOMP * x.dL;
+        const cK = ALPHA_DECOMP * dK;
+        const cA = x.dY - cL - cK;  // Solow residual dengan elastisitas regresi
+        sumL += cL;
+        sumK += cK;
+        sumA += cA;
         sumY += x.dY;
         n++;
       }
@@ -1516,10 +1566,9 @@ function chartWaterfall(cL, cK, cA, total) {
 
 function calcC() {
   let alpha = parseFloat(document.getElementById('inputAlpha').value);
-  if (isNaN(alpha) || alpha < 0.1) alpha = 0.55;
-  if (alpha > 0.9) alpha = 0.9;
-  const beta = 1 - alpha;
-  document.getElementById('inputBeta').value = beta.toFixed(2);
+  let beta  = parseFloat(document.getElementById('inputBeta').value);
+  if (isNaN(alpha)) alpha = 0.0871;
+  if (isNaN(beta))  beta  = 1.7311;
 
   const dL = parseFloat(document.getElementById('inputDL').value) || 0;
   const dK = parseFloat(document.getElementById('inputDK').value) || 0;
@@ -1540,7 +1589,7 @@ function calcC() {
   chartWaterfall(cL, cK, cA, total);
 }
 
-['inputAlpha', 'inputDL', 'inputDK', 'inputDA'].forEach(id => {
+['inputAlpha', 'inputBeta', 'inputDL', 'inputDK', 'inputDA'].forEach(id => {
   document.getElementById(id).addEventListener('input', calcC);
 });
 
