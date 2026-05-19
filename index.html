@@ -1255,7 +1255,7 @@ details .details-body p { margin-bottom: 10px; }
       <div class="formula-box-inner">$$ \ln Y = c_0 + \alpha \ln K + \beta \ln L $$</div>
       <div class="elasticity-result">
         <span class="elast-label">β =</span>
-        <span class="elast-value tone-em">1,7311</span>
+        <span class="elast-value tone-em">1,7279</span>
       </div>
       <p class="card-interp">+1% pekerja → +1,73% PDB</p>
     </div>
@@ -1270,7 +1270,7 @@ details .details-body p { margin-bottom: 10px; }
       <div class="formula-box-inner">$$ \ln L = c_0' + \alpha' \ln K + \beta_{inv} \ln Y $$</div>
       <div class="elasticity-result">
         <span class="elast-label">β<sub>inv</sub> =</span>
-        <span class="elast-value tone-navy">0,3966</span>
+        <span class="elast-value tone-navy">0,3988</span>
       </div>
       <p class="card-interp">+1% PDB → +0,40% lapangan kerja</p>
     </div>
@@ -1282,7 +1282,7 @@ details .details-body p { margin-bottom: 10px; }
   <div class="section-head">
     <div class="eyebrow">§ 04 · Catatan Konseptual</div>
     <h2>Padahal tidak: elastisitas <em>tidak</em> simetris</h2>
-    <p class="lead">Banyak yang keliru memperlakukan elastisitas ekonomi sebagai hubungan dua arah yang identik. Arah A→B dan B→A bisa beda magnitudo — atau bahkan beda nature. Inilah sebabnya β = 1,7311 dan β<sub>inv</sub> = 0,3966.</p>
+    <p class="lead">Banyak yang keliru memperlakukan elastisitas ekonomi sebagai hubungan dua arah yang identik. Arah A→B dan B→A bisa beda magnitudo — atau bahkan beda nature. Inilah sebabnya β = 1,7279 dan β<sub>inv</sub> = 0,3988.</p>
   </div>
 
   <div class="illustration-grid">
@@ -1302,7 +1302,7 @@ details .details-body p { margin-bottom: 10px; }
   </div>
 
   <div class="bridge-note" style="border-left-color: var(--emerald);">
-    <p><strong>Aplikasi ke Cobb-Douglas:</strong> Persamaan A menjawab arah "L → Y" (β = 1,7311). Persamaan B menjawab arah "Y → L" (β<sub>inv</sub> = 0,3966). Keduanya valid, tapi menjawab pertanyaan yang berbeda. Itulah kenapa di kalkulator: gunakan B saat <em>start dari sisi PDB</em>, gunakan A saat <em>start dari sisi tenaga kerja</em>.</p>
+    <p><strong>Aplikasi ke Cobb-Douglas:</strong> Persamaan A menjawab arah "L → Y" (β = 1,7279). Persamaan B menjawab arah "Y → L" (β<sub>inv</sub> = 0,3988). Keduanya valid, tapi menjawab pertanyaan yang berbeda. Itulah kenapa di kalkulator: gunakan B saat <em>start dari sisi PDB</em>, gunakan A saat <em>start dari sisi tenaga kerja</em>.</p>
   </div>
 </section>
 
@@ -1373,7 +1373,7 @@ details .details-body p { margin-bottom: 10px; }
     <div class="chart-header">
       <div>
         <h4>Dekomposisi sumber pertumbuhan per dekade</h4>
-        <div class="chart-meta">Rata-rata kontribusi mesin K, L, dan A · α=0,0871, β=1,7311 (regresi)</div>
+        <div class="chart-meta">Rata-rata kontribusi mesin K, L, dan A · α=0,0870, β=1,7279 (regresi)</div>
       </div>
     </div>
     <div class="chart-container" style="height:340px;"><canvas id="chartDecomp"></canvas></div>
@@ -1394,7 +1394,7 @@ details .details-body p { margin-bottom: 10px; }
     <div class="calc-label">
       <span class="num" style="color:var(--emerald);">A</span>
       <span class="tag tag-em">Sisi Permintaan</span>
-      <span class="tag">β<sub>inv</sub> = 0,3966</span>
+      <span class="tag">β<sub>inv</sub> = 0,3988</span>
     </div>
     <h3>+1% PDB → berapa lapangan kerja yang terbuka?</h3>
     <p class="calc-sub">Konversi laju pertumbuhan ekonomi tahunan menjadi proyeksi serapan tenaga kerja netto.</p>
@@ -1435,7 +1435,7 @@ details .details-body p { margin-bottom: 10px; }
     <div class="calc-label">
       <span class="num" style="color:var(--navy);">B</span>
       <span class="tag tag-navy">Sisi Penawaran</span>
-      <span class="tag">β = 1,7311</span>
+      <span class="tag">β = 1,7279</span>
     </div>
     <h3>+1 juta lapangan kerja → berapa dorongan ke PDB?</h3>
     <p class="calc-sub">Konversi serapan tenaga kerja menjadi sumbangan langsung pada laju pertumbuhan ekonomi.</p>
@@ -1459,7 +1459,7 @@ details .details-body p { margin-bottom: 10px; }
       <span class="result-label">Kontribusi Langsung ke %ΔY Tahunan</span>
       <div class="result-value" id="resultContribution">+5,91<span class="unit">% per tahun</span></div>
       <div class="result-detail" id="resultContributionDetail">
-        Pertumbuhan pekerja sebesar <strong id="echoPercL">3,413%</strong>, dikali elastisitas output β=1,7311, memberikan dorongan langsung sebesar angka di atas terhadap pertumbuhan PDB tahunan (ceteris paribus K dan A).
+        Pertumbuhan pekerja sebesar <strong id="echoPercL">3,413%</strong>, dikali elastisitas output β=1,7279, memberikan dorongan langsung sebesar angka di atas terhadap pertumbuhan PDB tahunan (ceteris paribus K dan A).
       </div>
     </div>
   </div>
@@ -1469,7 +1469,7 @@ details .details-body p { margin-bottom: 10px; }
     <div class="calc-label">
       <span class="num" style="color:var(--gold);">C</span>
       <span class="tag tag-gold">Growth Accounting</span>
-      <span class="tag">α = 0,087 · β = 1,7311</span>
+      <span class="tag">α = 0,087 · β = 1,7279</span>
     </div>
     <h3>Simulasi bauran tiga mesin pertumbuhan</h3>
     <p class="calc-sub">Kombinasi modal (K), tenaga kerja (L), dan teknologi (A) ke total pertumbuhan PDB tahunan — memakai elastisitas dari regresi Persamaan A (1986–2025).</p>
@@ -1481,13 +1481,13 @@ details .details-body p { margin-bottom: 10px; }
     <div class="input-row">
       <div class="input-field">
         <label>α — Elastisitas Modal</label>
-        <input type="number" id="inputAlpha" value="0.0871" min="0" max="2" step="0.001" />
-        <div class="input-help">Default 0,0871 (regresi Persamaan A). Multicollinearity tinggi K↔L membuat efek marjinal murni K kecil di data Indonesia.</div>
+        <input type="number" id="inputAlpha" value="0.0870" min="0" max="2" step="0.001" />
+        <div class="input-help">Default 0,0870 (regresi Persamaan A). Multicollinearity tinggi K↔L membuat efek marjinal murni K kecil di data Indonesia.</div>
       </div>
       <div class="input-field">
         <label>β — Elastisitas Tenaga Kerja</label>
-        <input type="number" id="inputBeta" value="1.7311" min="0" max="3" step="0.001" />
-        <div class="input-help">Default 1,7311 (regresi Persamaan A). Editable bila ingin uji skenario alternatif.</div>
+        <input type="number" id="inputBeta" value="1.7279" min="0" max="3" step="0.001" />
+        <div class="input-help">Default 1,7279 (regresi Persamaan A). Editable bila ingin uji skenario alternatif.</div>
       </div>
     </div>
 
@@ -1561,7 +1561,7 @@ details .details-body p { margin-bottom: 10px; }
     <div class="card" style="padding: 32px; border-left: 3px solid var(--emerald); background: var(--paper-2);">
       <div class="card-title"><span class="tag tag-em">Kalkulasi Dampak</span></div>
       <h4 style="margin-bottom: 4px;">Langkah-langkah perhitungan</h4>
-      <p class="card-desc" style="margin-bottom: 18px;">Aplikasi Persamaan A (β = 1,7311) pada data SPPG.</p>
+      <p class="card-desc" style="margin-bottom: 18px;">Aplikasi Persamaan A (β = 1,7279) pada data SPPG.</p>
 
       <div class="mbg-step">
         <div class="mbg-step-num">1</div>
@@ -1590,7 +1590,7 @@ details .details-body p { margin-bottom: 10px; }
       <div class="mbg-step is-final">
         <div class="mbg-step-num">4</div>
         <div class="mbg-step-body">
-          <div class="mbg-step-label">%ΔY = 0,195% × β (=1,7311)</div>
+          <div class="mbg-step-label">%ΔY = 0,195% × β (=1,7279)</div>
           <div class="mbg-step-value">+0,34% per tahun</div>
         </div>
       </div>
@@ -1617,46 +1617,46 @@ details .details-body p { margin-bottom: 10px; }
    DATA HISTORIS 1986-2025 (40 OBSERVASI)
    ================================================================= */
 const DATA = [
-  {t:1986, dY:5.88, tfp:null,   L:65655030, Y:105.88, K:26.2,    lnY:4.6623, lnL:17.9999, lnK:3.2657, est:false},
-  {t:1987, dY:4.93, tfp:-1.774, L:67878350, Y:111.10, K:31.42,   lnY:4.7104, lnL:18.0332, lnK:3.4474, est:false},
-  {t:1988, dY:5.78, tfp:-2.231, L:69828230, Y:117.52, K:38.36,   lnY:4.7666, lnL:18.0615, lnK:3.6470, est:false},
-  {t:1989, dY:7.46, tfp:-0.184, L:70743560, Y:126.29, K:47.71,   lnY:4.8385, lnL:18.0745, lnK:3.8651, est:false},
-  {t:1990, dY:7.24, tfp:0.516,  L:75850000, Y:135.43, K:59.76,   lnY:4.9084, lnL:18.1442, lnK:4.0903, est:false},
-  {t:1991, dY:8.93, tfp:1.961,  L:76420000, Y:147.52, K:67.49,   lnY:4.9939, lnL:18.1517, lnK:4.2119, est:false},
-  {t:1992, dY:6.52, tfp:1.422,  L:78520000, Y:157.15, K:72.77,   lnY:5.0571, lnL:18.1788, lnK:4.2873, est:false},
-  {t:1993, dY:7.96, tfp:1.698,  L:79200000, Y:169.65, K:86.67,   lnY:5.1337, lnL:18.1874, lnK:4.4621, est:false},
-  {t:1994, dY:7.54, tfp:-0.742, L:82040000, Y:182.44, K:105.38,  lnY:5.2064, lnL:18.2227, lnK:4.6575, est:false},
-  {t:1995, dY:8.22, tfp:1.255,  L:80110000, Y:197.44, K:129.22,  lnY:5.2854, lnL:18.1989, lnK:4.8615, est:false},
-  {t:1996, dY:7.82, tfp:0.573,  L:85702000, Y:212.87, K:157.65,  lnY:5.3606, lnL:18.2663, lnK:5.0603, est:false},
-  {t:1997, dY:4.70, tfp:-2.124, L:87050000, Y:222.88, K:177.69,  lnY:5.4066, lnL:18.2819, lnK:5.1800, est:false},
-  {t:1998, dY:-13.13,tfp:-17.485,L:87672000, Y:193.62, K:243.04, lnY:5.2659, lnL:18.2891, lnK:5.4932, est:false},
-  {t:1999, dY:0.79, tfp:-2.138, L:88817000, Y:195.15, K:221.47,  lnY:5.2737, lnL:18.3020, lnK:5.4002, est:false},
-  {t:2000, dY:4.92, tfp:1.221,  L:89837700, Y:204.75, K:275.88,  lnY:5.3218, lnL:18.3135, lnK:5.6199, est:false},
-  {t:2001, dY:3.64, tfp:0.001,  L:90807400, Y:212.22, K:323.88,  lnY:5.3576, lnL:18.3242, lnK:5.7803, est:false},
-  {t:2002, dY:4.50, tfp:2.072,  L:91647200, Y:221.76, K:353.97,  lnY:5.4016, lnL:18.3334, lnK:5.8692, est:false},
-  {t:2003, dY:4.78, tfp:1.094,  L:90784900, Y:232.36, K:392.79,  lnY:5.4483, lnL:18.3240, lnK:5.9732, est:false},
-  {t:2004, dY:5.03, tfp:0.910,  L:93722000, Y:244.05, K:515.38,  lnY:5.4973, lnL:18.3558, lnK:6.2449, est:false},
-  {t:2005, dY:5.69, tfp:2.432,  L:94453000, Y:257.95, K:655.85,  lnY:5.5527, lnL:18.3636, lnK:6.4859, est:false},
-  {t:2006, dY:5.50, tfp:1.731,  L:95317000, Y:272.14, K:805.79,  lnY:5.6063, lnL:18.3727, lnK:6.6918, est:false},
-  {t:2007, dY:6.35, tfp:0.594,  L:98757000, Y:289.40, K:985.63,  lnY:5.6678, lnL:18.4081, lnK:6.8932, est:false},
-  {t:2008, dY:6.01, tfp:1.113,  L:102301000,Y:306.81, K:1370.9,  lnY:5.7262, lnL:18.4434, lnK:7.2225, est:false},
-  {t:2009, dY:4.70, tfp:0.212,  L:104678000,Y:321.23, K:1740,    lnY:5.7721, lnL:18.4663, lnK:7.4616, est:false},
-  {t:2010, dY:6.38, tfp:0.914,  L:107807000,Y:341.72, K:2130,    lnY:5.8339, lnL:18.4958, lnK:7.6638, est:false},
-  {t:2011, dY:6.17, tfp:3.062,  L:110475000,Y:362.80, K:2450,    lnY:5.8938, lnL:18.5203, lnK:7.8038, est:false},
-  {t:2012, dY:6.03, tfp:1.944,  L:111806000,Y:384.68, K:2820,    lnY:5.9524, lnL:18.5322, lnK:7.9444, est:false},
-  {t:2013, dY:5.56, tfp:4.259,  L:110800000,Y:406.06, K:3050,    lnY:6.0065, lnL:18.5232, lnK:8.0228, est:false},
-  {t:2014, dY:5.01, tfp:-0.479, L:114610000,Y:426.39, K:3440,    lnY:6.0553, lnL:18.5570, lnK:8.1432, est:false},
-  {t:2015, dY:4.88, tfp:0.438,  L:114800000,Y:447.18, K:3780,    lnY:6.1029, lnL:18.5587, lnK:8.2374, est:false},
-  {t:2016, dY:5.03, tfp:1.666,  L:118410000,Y:469.69, K:4040,    lnY:6.1520, lnL:18.5896, lnK:8.3039, est:false},
-  {t:2017, dY:5.07, tfp:1.183,  L:121020000,Y:493.50, K:4370,    lnY:6.2015, lnL:18.6114, lnK:8.3825, est:false},
-  {t:2018, dY:5.17, tfp:1.950,  L:124010000,Y:519.04, K:4790,    lnY:6.2519, lnL:18.6358, lnK:8.4742, est:false},
-  {t:2019, dY:5.02, tfp:0.194,  L:126510000,Y:545.09, K:5120,    lnY:6.3009, lnL:18.6558, lnK:8.5409, est:false},
-  {t:2020, dY:-2.07,tfp:-2.721, L:128450000,Y:533.83, K:4900,    lnY:6.2800, lnL:18.6710, lnK:8.4969, est:false},
-  {t:2021, dY:3.70, tfp:1.980,  L:131050000,Y:553.60, K:5230,    lnY:6.3164, lnL:18.6910, lnK:8.5621, est:false},
-  {t:2022, dY:5.31, tfp:-0.958, L:135300000,Y:582.98, K:5696,    lnY:6.3681, lnL:18.7230, lnK:8.6475, est:false},
-  {t:2023, dY:5.05, tfp:0.515,  L:139850000,Y:612.41, K:6090,    lnY:6.4174, lnL:18.7560, lnK:8.7145, est:false},
-  {t:2024, dY:5.03, tfp:0.22,   L:144640000,Y:643.22, K:6452,    lnY:6.4664, lnL:18.7897, lnK:8.7722, est:true},
-  {t:2025, dY:5.11, tfp:1.11,   L:146540000,Y:676.08, K:6852,    lnY:6.5163, lnL:18.8028, lnK:8.8323, est:true},
+  {t:1986, dY:5.88, tfp:null    , L:65655030, Y:105.88, K:24.78, lnY:4.6623, lnL:17.9999, lnK:3.2101, est:false},
+  {t:1987, dY:4.93, tfp:-1.774  , L:67878350, Y:111.1, K:30.98, lnY:4.7104, lnL:18.0332, lnK:3.4333, est:false},
+  {t:1988, dY:5.78, tfp:-2.231  , L:69828230, Y:117.52, K:36.80, lnY:4.7666, lnL:18.0615, lnK:3.6056, est:false},
+  {t:1989, dY:7.46, tfp:-0.184  , L:70743560, Y:126.29, K:45.66, lnY:4.8385, lnL:18.0745, lnK:3.8212, est:false},
+  {t:1990, dY:7.24, tfp:0.516   , L:75850000, Y:135.43, K:55.63, lnY:4.9084, lnL:18.1442, lnK:4.0188, est:false},
+  {t:1991, dY:8.93, tfp:1.961   , L:76420000, Y:147.52, K:63.89, lnY:4.9939, lnL:18.1517, lnK:4.1572, est:false},
+  {t:1992, dY:6.52, tfp:1.422   , L:78520000, Y:157.15, K:70.82, lnY:5.0571, lnL:18.1788, lnK:4.2601, est:false},
+  {t:1993, dY:7.96, tfp:1.698   , L:79200000, Y:169.65, K:86.67, lnY:5.1337, lnL:18.1874, lnK:4.4621, est:false},
+  {t:1994, dY:7.54, tfp:-0.742  , L:82040000, Y:182.44, K:105.38, lnY:5.2064, lnL:18.2227, lnK:4.6576, est:false},
+  {t:1995, dY:8.22, tfp:1.255   , L:80110000, Y:197.44, K:129.22, lnY:5.2854, lnL:18.1989, lnK:4.8615, est:false},
+  {t:1996, dY:7.82, tfp:0.573   , L:85702000, Y:212.87, K:157.65, lnY:5.3606, lnL:18.2663, lnK:5.0604, est:false},
+  {t:1997, dY:4.7, tfp:-2.124  , L:87050000, Y:222.88, K:177.69, lnY:5.4066, lnL:18.2819, lnK:5.1800, est:false},
+  {t:1998, dY:-13.13, tfp:-17.485 , L:87672000, Y:193.62, K:243.04, lnY:5.2659, lnL:18.2891, lnK:5.4932, est:false},
+  {t:1999, dY:0.79, tfp:-2.138  , L:88817000, Y:195.15, K:221.47, lnY:5.2737, lnL:18.3020, lnK:5.4003, est:false},
+  {t:2000, dY:4.92, tfp:1.221   , L:89837700, Y:204.75, K:275.88, lnY:5.3218, lnL:18.3135, lnK:5.6200, est:false},
+  {t:2001, dY:3.64, tfp:0.001   , L:90807400, Y:212.22, K:323.88, lnY:5.3576, lnL:18.3242, lnK:5.7804, est:false},
+  {t:2002, dY:4.5, tfp:2.072   , L:91647200, Y:221.76, K:353.97, lnY:5.4016, lnL:18.3334, lnK:5.8692, est:false},
+  {t:2003, dY:4.78, tfp:1.094   , L:90784900, Y:232.36, K:392.79, lnY:5.4483, lnL:18.3240, lnK:5.9733, est:false},
+  {t:2004, dY:5.03, tfp:0.91    , L:93722000, Y:244.05, K:515.38, lnY:5.4973, lnL:18.3558, lnK:6.2449, est:false},
+  {t:2005, dY:5.69, tfp:2.432   , L:94453000, Y:257.95, K:655.85, lnY:5.5527, lnL:18.3636, lnK:6.4859, est:false},
+  {t:2006, dY:5.5, tfp:1.731   , L:95317000, Y:272.14, K:805.79, lnY:5.6063, lnL:18.3727, lnK:6.6918, est:false},
+  {t:2007, dY:6.35, tfp:0.594   , L:98757000, Y:289.4, K:985.63, lnY:5.6678, lnL:18.4081, lnK:6.8933, est:false},
+  {t:2008, dY:6.01, tfp:1.113   , L:102301000, Y:306.81, K:1370.72, lnY:5.7262, lnL:18.4434, lnK:7.2231, est:false},
+  {t:2009, dY:4.7, tfp:0.212   , L:104678000, Y:321.23, K:1744.36, lnY:5.7721, lnL:18.4663, lnK:7.4641, est:false},
+  {t:2010, dY:6.38, tfp:0.914   , L:107807000, Y:341.72, K:2127.84, lnY:5.8339, lnL:18.4958, lnK:7.6629, est:false},
+  {t:2011, dY:6.17, tfp:3.062   , L:110475000, Y:362.8, K:2451.91, lnY:5.8938, lnL:18.5203, lnK:7.8046, est:false},
+  {t:2012, dY:6.03, tfp:1.944   , L:111806000, Y:384.68, K:2819.03, lnY:5.9524, lnL:18.5322, lnK:7.9441, est:false},
+  {t:2013, dY:5.56, tfp:4.259   , L:110800000, Y:406.06, K:3051.50, lnY:6.0065, lnL:18.5232, lnK:8.0234, est:false},
+  {t:2014, dY:5.01, tfp:-0.479  , L:114610000, Y:426.39, K:3436.92, lnY:6.0553, lnL:18.5570, lnK:8.1423, est:false},
+  {t:2015, dY:4.88, tfp:0.438   , L:114800000, Y:447.18, K:3782.01, lnY:6.1029, lnL:18.5587, lnK:8.2380, est:false},
+  {t:2016, dY:5.03, tfp:1.666   , L:118410000, Y:469.69, K:4040.20, lnY:6.1520, lnL:18.5896, lnK:8.3040, est:false},
+  {t:2017, dY:5.07, tfp:1.183   , L:121020000, Y:493.5, K:4370.57, lnY:6.2015, lnL:18.6114, lnK:8.3826, est:false},
+  {t:2018, dY:5.17, tfp:1.95    , L:124010000, Y:519.04, K:4791.21, lnY:6.2519, lnL:18.6358, lnK:8.4745, est:false},
+  {t:2019, dY:5.02, tfp:0.194   , L:126510000, Y:545.09, K:5121.37, lnY:6.3009, lnL:18.6558, lnK:8.5412, est:false},
+  {t:2020, dY:-2.07, tfp:-2.721  , L:128450000, Y:533.83, K:4897.05, lnY:6.2800, lnL:18.6710, lnK:8.4964, est:false},
+  {t:2021, dY:3.7, tfp:1.98    , L:131050000, Y:553.6, K:5227.85, lnY:6.3164, lnL:18.6910, lnK:8.5618, est:false},
+  {t:2022, dY:5.31, tfp:-0.958  , L:135300000, Y:582.98, K:5697.28, lnY:6.3681, lnL:18.7230, lnK:8.6477, est:false},
+  {t:2023, dY:5.05, tfp:0.515   , L:139850000, Y:612.41, K:6090.68, lnY:6.4174, lnL:18.7560, lnK:8.7145, est:false},
+  {t:2024, dY:5.03, tfp:0.22    , L:144640000, Y:643.22, K:6452.53, lnY:6.4664, lnL:18.7897, lnK:8.7722, est:true},
+  {t:2025, dY:5.11, tfp:1.11    , L:146540000, Y:676.08, K:6852.62, lnY:6.5163, lnL:18.8028, lnK:8.8324, est:true},
 ];
 
 // Hitung %dL
@@ -1669,8 +1669,8 @@ for (let i = 0; i < DATA.length; i++) {
    KONSTANTA EKONOMETRIK
    ================================================================= */
 const BASE_PEKERJA_2025 = 146540000;
-const BETA_OUTPUT  = 1.7311;     // Persamaan A: ln Y = c0 + α ln K + β ln L
-const BETA_INVERSE = 0.3966437;  // Persamaan B: ln L = c0' + α' ln K + β_inv ln Y
+const BETA_OUTPUT  = 1.7279;     // Persamaan A: ln Y = c0 + α ln K + β ln L
+const BETA_INVERSE = 0.3988340;  // Persamaan B: ln L = c0' + α' ln K + β_inv ln Y
 
 /* =================================================================
    HELPERS
@@ -1885,7 +1885,7 @@ function chartTrend() {
 // CHART 3: DECADE DECOMPOSITION
 function chartDecomp() {
   const ctx = document.getElementById('chartDecomp').getContext('2d');
-  const ALPHA_DECOMP = 0.0871, BETA_DECOMP = 1.7311;
+  const ALPHA_DECOMP = 0.0870, BETA_DECOMP = 1.7279;
   const decades = [
     {label: '1987-1996', range: [1987, 1996]},
     {label: '1997-2006', range: [1997, 2006]},
@@ -2100,8 +2100,8 @@ function chartWaterfall(cL, cK, cA, total) {
 function calcC() {
   let alpha = parseFloat(document.getElementById('inputAlpha').value);
   let beta  = parseFloat(document.getElementById('inputBeta').value);
-  if (isNaN(alpha)) alpha = 0.0871;
-  if (isNaN(beta))  beta  = 1.7311;
+  if (isNaN(alpha)) alpha = 0.0870;
+  if (isNaN(beta))  beta  = 1.7279;
 
   const dL = parseFloat(document.getElementById('inputDL').value) || 0;
   const dK = parseFloat(document.getElementById('inputDK').value) || 0;
